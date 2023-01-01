@@ -80,3 +80,28 @@ sameFrequency(34, 14); // false
 sameFrequency(3589578, 5879385); // true
 sameFrequency(22, 222); // false
 
+function areThereDuplicates(...args) {
+  let result = true;
+  const frequencyObj = {};
+  for (let i = 0; i < args.length; i++) {
+    let letter = String(args[i]);
+    frequencyObj[letter]
+      ? (frequencyObj[letter] += 1)
+      : (frequencyObj[letter] = 1);
+  }
+  console.log(frequencyObj);
+  for (let i = 0; i < args.length; i++) {
+    if (frequencyObj[args[i]] > 1) {
+      console.log('duplicate key exists');
+      console.log(args, result);
+      return result;
+    }
+  }
+  result = false;
+  console.log(args, result);
+  return result;
+}
+
+areThereDuplicates(1, 2, 3); // false
+areThereDuplicates(1, 2, 2); // true
+areThereDuplicates('a', 'b', 'c', 'a'); // true
