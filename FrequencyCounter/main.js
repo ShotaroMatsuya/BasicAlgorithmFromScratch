@@ -44,3 +44,39 @@ validAnagram('awesome', 'awesom'); // false
 validAnagram('amanaplanacanalpanama', 'acanalmanplanpamana'); // false
 validAnagram('qwerty', 'qeywrt'); // true
 validAnagram('texttwisttime', 'timetwisttext'); // true
+
+function sameFrequency(first, second) {
+  let str1 = String(first);
+  let str2 = String(second);
+  let results = false;
+  if (str1.length !== str2.length) {
+    console.log('not equal length');
+    console.log(first, second, results);
+    return results;
+  }
+  const lookup = {};
+  for (let i = 0; i < str1.length; i++) {
+    let letter = str1[i];
+    lookup[letter] ? (lookup[letter] += 1) : (lookup[letter] = 1);
+  }
+  console.log(lookup);
+  for (let i = 0; i < str2.length; i++) {
+    let letter = str2[i];
+    if (!lookup[letter]) {
+      console.log('different string contained');
+      console.log(first, second, results);
+      return results;
+    } else {
+      lookup[letter] -= 1;
+    }
+  }
+  results = true;
+  console.log(first, second, results);
+  return results;
+}
+
+sameFrequency(182, 281); // true
+sameFrequency(34, 14); // false
+sameFrequency(3589578, 5879385); // true
+sameFrequency(22, 222); // false
+
