@@ -69,3 +69,151 @@ test3 = flatten([[1], [2], [3]]); // [1,2,3]
 test4 = flatten([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]]); // [1,2,3
 
 console.log(test1, test2, test3, test4);
+
+function capitalizeFirst(arr) {
+  let result = [];
+  if (arr.length === 0) return [];
+  for (let i = 0; i < arr.length; i++) {
+    let initialStr = arr[i][0].toUpperCase();
+    let combinedStr = initialStr + arr[i].slice(1);
+    result.push(combinedStr);
+  }
+  return result;
+}
+
+test1 = capitalizeFirst(['car', 'taco', 'banana']); // ['Car','Taco','Banana']
+
+console.log(test1);
+
+function nestedEvenSum(obj) {
+  let result = 0;
+  for (let val in obj) {
+    if (typeof obj[val] === 'number' && obj[val] % 2 === 0) {
+      result += obj[val];
+    } else {
+      if (typeof obj[val] === 'object') {
+        result += nestedEvenSum(obj[val]);
+      }
+    }
+  }
+  return result;
+}
+
+var obj1 = {
+  outer: 2,
+  obj: {
+    inner: 2,
+    otherObj: {
+      superInner: 2,
+      notANumber: true,
+      alsoNotANumber: 'yup',
+    },
+  },
+};
+
+var obj2 = {
+  a: 2,
+  b: { b: 2, bb: { b: 3, bb: { b: 2 } } },
+  c: { c: { c: 2 }, cc: 'ball', ccc: 5 },
+  d: 1,
+  e: { e: { e: 2 }, ee: 'car' },
+};
+
+test1 = nestedEvenSum(obj1); // 6
+test2 = nestedEvenSum(obj2); // 10
+
+console.log(test1, test2);
+
+function capitalizedWords(arr) {
+  let results = [];
+  for (let val of arr) {
+    val = val.toUpperCase();
+    results.push(val);
+  }
+  return results;
+}
+
+let words = ['i', 'am', 'learning', 'recursion'];
+test1 = capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
+
+console.log(test1);
+
+function stringifyNumbers(obj) {
+  let newObj = {};
+
+  for (let key in obj) {
+    if (Array.isArray(obj[key])) {
+      newObj[key] = obj[key];
+    } else if (typeof obj[key] === 'object') {
+      newObj[key] = stringifyNumbers(obj[key]);
+    } else if (typeof obj[key] === 'number') {
+      newObj[key] = obj[key].toString();
+    } else {
+      newObj[key] = obj[key];
+    }
+  }
+  return newObj;
+}
+
+let obj = {
+  num: 1,
+  test: [],
+  data: {
+    val: 4,
+    info: {
+      isRight: true,
+      random: 66,
+    },
+  },
+};
+
+test1 = stringifyNumbers(obj);
+
+/*
+{
+    num: "1",
+    test: [],
+    data: {
+        val: "4",
+        info: {
+            isRight: true,
+            random: "66"
+        }
+    }
+}
+*/
+
+console.log(test1);
+
+function collectStrings(obj) {
+  let results = [];
+  for (let key in obj) {
+    if (typeof obj[key] === 'object') {
+      results = results.concat(collectStrings(obj[key]));
+    }
+    if (typeof obj[key] === 'string') {
+      results.push(obj[key]);
+    }
+  }
+
+  return results;
+}
+
+const testobj1 = {
+  stuff: 'foo',
+  data: {
+    val: {
+      thing: {
+        info: 'bar',
+        moreInfo: {
+          evenMoreInfo: {
+            weMadeIt: 'baz',
+          },
+        },
+      },
+    },
+  },
+};
+
+test1 = collectStrings(testobj1); // ["foo", "bar", "baz"])
+console.log(test1);
