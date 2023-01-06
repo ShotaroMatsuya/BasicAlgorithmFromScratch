@@ -95,6 +95,17 @@ class SinglyLinkedList {
     this.length++;
     return true;
   }
+
+  remove(index) {
+    if (index < 0 || this.length - 1 < index) return undefined;
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
+    let current = this.get(index);
+    let prev = this.get(index - 1);
+    prev.next = current.next;
+    this.length--;
+    return current;
+  }
 }
 
 let list = new SinglyLinkedList();
@@ -103,7 +114,7 @@ list.unshift('HI');
 list.push('You');
 list.unshift('!');
 list.insert('ok', 3);
-list.insert('Hello', 0);
-list.insert('see you.', 4);
+
+list.remove(3);
 
 console.log(list);
