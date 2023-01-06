@@ -106,6 +106,25 @@ class SinglyLinkedList {
     this.length--;
     return current;
   }
+
+  reverse() {
+    let current = this.head;
+    let next;
+    let prev = null;
+    // update pointer
+    this.head = this.tail;
+    this.tail = current;
+    // update next direction
+    for (let i = 0; i < this.length; i++) {
+      next = current.next;
+      current.next = prev;
+      // update for iteration
+      prev = current;
+      current = next;
+    }
+
+    return this;
+  }
 }
 
 let list = new SinglyLinkedList();
@@ -116,5 +135,6 @@ list.unshift('!');
 list.insert('ok', 3);
 
 list.remove(3);
+list.reverse();
 
 console.log(list);
