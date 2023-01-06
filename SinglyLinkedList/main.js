@@ -83,6 +83,18 @@ class SinglyLinkedList {
     current.val = val;
     return true;
   }
+
+  insert(val, index) {
+    if (index < 0 || this.length - 1 < index) return false;
+    if (index === 0) return !!this.unshift(val);
+    if (index === this.length - 1) return !!this.push(val);
+    let newNode = new Node(val);
+    let prev = this.get(index - 1);
+    newNode.next = prev.next;
+    prev.next = newNode;
+    this.length++;
+    return true;
+  }
 }
 
 let list = new SinglyLinkedList();
@@ -90,8 +102,8 @@ list.unshift('HI');
 
 list.push('You');
 list.unshift('!');
-list.set('!!!', 0);
-list.set('hi', 1);
-list.set('not found', 3);
+list.insert('ok', 3);
+list.insert('Hello', 0);
+list.insert('see you.', 4);
 
 console.log(list);
