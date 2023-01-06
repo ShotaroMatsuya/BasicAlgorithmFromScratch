@@ -76,6 +76,13 @@ class SinglyLinkedList {
     }
     return current;
   }
+
+  set(val, index) {
+    let current = this.get(index);
+    if (!current) return false;
+    current.val = val;
+    return true;
+  }
 }
 
 let list = new SinglyLinkedList();
@@ -83,10 +90,8 @@ list.unshift('HI');
 
 list.push('You');
 list.unshift('!');
-
-const test1 = list.get(0);
-const test2 = list.get(3);
-const test3 = list.get(-1);
-const test4 = list.get(1);
+list.set('!!!', 0);
+list.set('hi', 1);
+list.set('not found', 3);
 
 console.log(list);
