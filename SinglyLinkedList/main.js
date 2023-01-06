@@ -40,12 +40,24 @@ class SinglyLinkedList {
     }
     return current;
   }
+
+  shift() {
+    if (!this.length) return undefined;
+    const current = this.head;
+    const newHead = current.next;
+    this.head = newHead;
+    this.length--;
+    if (this.length === 0) {
+      this.tail = null;
+    }
+    return current;
+  }
 }
 
 let list = new SinglyLinkedList();
 list.push('HI');
 list.push('You');
-list.pop();
-list.pop();
+list.shift();
+list.shift();
 
 console.log(list);
