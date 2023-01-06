@@ -52,12 +52,27 @@ class SinglyLinkedList {
     }
     return current;
   }
+
+  unshift(val) {
+    const newNode = new Node(val);
+    if (!this.length) {
+      this.head = newNode;
+      this.tail = newNode;
+      this.length++;
+      return this;
+    }
+    let current = this.head;
+    this.head = newNode;
+    this.head.next = current;
+    this.length++;
+    return this;
+  }
 }
 
 let list = new SinglyLinkedList();
-list.push('HI');
+list.unshift('HI');
+
 list.push('You');
-list.shift();
-list.shift();
+list.unshift('!');
 
 console.log(list);
