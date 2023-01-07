@@ -68,31 +68,50 @@ class DoublyLinkedList {
     this.length++;
     return this;
   }
+  get(index) {
+    if (this.length === 0) return nul;
+    if (this.length <= index || index < 0) return null;
+    let overHalf = Math.floor(this.length / 2) < index + 1;
+    let current;
+    if (overHalf) {
+      current = this.tail;
+      for (let i = 0; i < this.length - index - 1; i++) {
+        current = current.prev;
+      }
+    } else {
+      current = this.head;
+      for (let i = 0; i < index; i++) {
+        current = current.next;
+      }
+    }
+    return current;
+  }
+
+  set(index, val) {
+    if (this.length <= index || index < 0) return false;
+    let targetNode = this.get(index);
+    targetNode.val = val;
+    return true;
+  }
 }
 
 var doublyLinkedList = new DoublyLinkedList();
-doublyLinkedList.unshift(5); // doublyLinkedList
-doublyLinkedList.length; // 1
-doublyLinkedList.head.val; // 5
-doublyLinkedList.tail.val; // 5
-doublyLinkedList.unshift(10);
-doublyLinkedList;
-doublyLinkedList.length; // 2
-doublyLinkedList.head.val; // 10
-doublyLinkedList.head.next.val; // 5
-doublyLinkedList.tail.val; // 5
-doublyLinkedList.unshift(15);
-doublyLinkedList;
-doublyLinkedList.length; // 3
-doublyLinkedList.head.val; // 15
-doublyLinkedList.tail.val; // 5
-doublyLinkedList.head.next.next.val; // 5
 
-doublyLinkedList.shift().val; // 15
-doublyLinkedList.length; // 2
-doublyLinkedList.shift().val; // 10
-doublyLinkedList.length; // 1
-doublyLinkedList.shift().val; // 5
-doublyLinkedList.length; // 0
-doublyLinkedList.pop(); // undefined
-doublyLinkedList.length; // 0
+doublyLinkedList.push(5).push(10).push(15).push(20);
+doublyLinkedList.get(0).val; // 5
+doublyLinkedList.get(1).val; // 10
+doublyLinkedList.get(2).val; // 15
+doublyLinkedList.get(3).val; // 20
+doublyLinkedList.get(4); // null
+
+var doublyLinkedList1 = new DoublyLinkedList();
+
+doublyLinkedList1.push(5).push(10).push(15).push(20);
+doublyLinkedList1.set(0, 10); // true
+doublyLinkedList1.length; // 4
+doublyLinkedList1.head.val; // 10
+
+doublyLinkedList1.set(10, 10); // false
+
+doublyLinkedList1.set(2, 100); // true
+doublyLinkedList1.head.next.next.val; // 100
