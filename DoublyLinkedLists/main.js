@@ -94,25 +94,51 @@ class DoublyLinkedList {
     }
     return false;
   }
+
+  insert(index, val) {
+    if (this.length <= index || index < 0) return false;
+    if (index === 0) return !!this.unshift(val);
+    if (index === this.length - 1) return !!this.push(val);
+    let newNode = new Node(val);
+    let prevNode = this.get(index - 1);
+    let nextNode = prevNode.next;
+    prevNode.next = newNode;
+    newNode.prev = prevNode;
+    nextNode.prev = newNode;
+    newNode.next = nextNode;
+    this.length++;
+    return true;
+  }
+
+  remove(index) {
+    let targetNode = this.get(index);
+    if (targetNode !== null) {
+      let prevNode = targetNode.prev;
+      let nextNode = targetNode.next;
+      prevNode.next = nextNode;
+      nextNode.prev = prevNode;
+    }
+    this.length--;
+    return targetNode;
+  }
 }
 
 var doublyLinkedList = new DoublyLinkedList();
-
 doublyLinkedList.push(5).push(10).push(15).push(20);
-doublyLinkedList.get(0).val; // 5
-doublyLinkedList.get(1).val; // 10
-doublyLinkedList.get(2).val; // 15
-doublyLinkedList.get(3).val; // 20
-doublyLinkedList.get(4); // null
+doublyLinkedList.insert(2, 12); // true
+doublyLinkedList.insert(100, 12); // false
+doublyLinkedList.length; // 5
+doublyLinkedList.head.val; // 5
+doublyLinkedList.head.next.val; // 10
+doublyLinkedList.head.next.next.val; // 12
+doublyLinkedList.head.next.next.next.val; // 15
+doublyLinkedList.head.next.next.next.next.val; // 20
 
 var doublyLinkedList1 = new DoublyLinkedList();
-
 doublyLinkedList1.push(5).push(10).push(15).push(20);
-doublyLinkedList1.set(0, 10); // true
-doublyLinkedList1.length; // 4
-doublyLinkedList1.head.val; // 10
-
-doublyLinkedList1.set(10, 10); // false
-
-doublyLinkedList1.set(2, 100); // true
-doublyLinkedList1.head.next.next.val; // 100
+doublyLinkedList1.remove(2).val; // 15
+doublyLinkedList1.remove(100); // undefined
+doublyLinkedList1.length; // 3
+doublyLinkedList1.head.val; // 5
+doublyLinkedList1.head.next.val; // 10
+doublyLinkedList1.head.next.next.val; // 20
