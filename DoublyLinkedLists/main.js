@@ -87,10 +87,12 @@ class DoublyLinkedList {
   }
 
   set(index, val) {
-    if (this.length <= index || index < 0) return false;
     let targetNode = this.get(index);
-    targetNode.val = val;
-    return true;
+    if (targetNode != null) {
+      targetNode.val = val;
+      return true;
+    }
+    return false;
   }
 }
 
