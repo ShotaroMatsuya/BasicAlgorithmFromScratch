@@ -69,7 +69,6 @@ class DoublyLinkedList {
     return this;
   }
   get(index) {
-    if (this.length === 0) return nul;
     if (this.length <= index || index < 0) return null;
     let overHalf = Math.floor(this.length / 2) < index + 1;
     let current;
