@@ -18,12 +18,18 @@ function validAnagram(str1, str2) {
   for (let i = 0; i < str2.length; i++) {
     frequencyObj2[str2[i]] = (frequencyObj2[str2[i]] || 0) + 1;
   }
-  Object.keys(frequencyObj1).forEach(str => {
-    if (!Object.keys(frequencyObj2).includes(str)) {
+  // Object.keys(frequencyObj1).forEach(str => {
+  //   if (!Object.keys(frequencyObj2).includes(str)) {
+  //     console.log('different string');
+  //     return result;
+  //   }
+  // });
+  for (let val of Object.keys(frequencyObj1)) {
+    if (!Object.keys(frequencyObj2).includes(val)) {
       console.log('different string');
       return result;
     }
-  });
+  }
 
   for (let key in frequencyObj1) {
     if (frequencyObj1[key] !== frequencyObj2[key]) {
