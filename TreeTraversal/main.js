@@ -35,7 +35,7 @@ class TreeTraversal {
       }
     }
   }
-  // Breadth First Search
+  // Breadth First Search(和名：幅優先探索)
   BFS() {
     let data = [],
       queue = [],
@@ -50,6 +50,19 @@ class TreeTraversal {
     }
     return data;
   }
+  // Depth First PreOrder(和名：行きがけ順)
+  DFSPreOrder() {
+    let data = [];
+    let current = this.root;
+    // helper
+    function traverse(node) {
+      data.push(node.value);
+      if (node.left) traverse(node.left);
+      if (node.right) traverse(node.right);
+    }
+    traverse(current);
+    return data;
+  }
 }
 
 let tree = new TreeTraversal();
@@ -59,4 +72,9 @@ tree.insert(15);
 tree.insert(3);
 tree.insert(8);
 tree.insert(20);
-// [10, 6, 15, 3, 8, 20]
+//       10
+//   6       15
+// 3   8         20
+
+tree.BFS(); // [10, 6, 15, 3, 8, 20]
+tree.DFSPreOrder(); // [10, 6, 3, 8, 15, 20]
