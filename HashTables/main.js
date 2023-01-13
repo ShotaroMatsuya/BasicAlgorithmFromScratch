@@ -20,7 +20,7 @@ function hash1(key, arrayLen) {
 }
 
 class HashTable {
-  constructor(size = 53) {
+  constructor(size = 4) {
     this.keyMap = new Array(size);
   }
 
@@ -34,4 +34,19 @@ class HashTable {
     }
     return total;
   }
+
+  set(key, value) {
+    let index = this._hash(key);
+    if (!this.keyMap[index]) {
+      this.keyMap[index] = [];
+    }
+    this.keyMap[index].push([key, value]);
+  }
+  get(key) {}
 }
+
+let ht = new HashTable();
+ht.set('hello world', 'goodbye!!');
+ht.set('dogs', 'are cool');
+ht.set('cats', 'are fine');
+ht.set('i love', 'pizza');
