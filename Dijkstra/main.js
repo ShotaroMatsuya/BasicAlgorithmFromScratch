@@ -10,3 +10,19 @@ class WeightedGraph {
     this.adjacencyList[vertex2].push({ node: vertex1, weight });
   }
 }
+
+class PriorityQueue {
+  constructor() {
+    this.values = [];
+  }
+  enqueue(val, priority) {
+    this.values.push({ val, priority });
+    this.sort();
+  }
+  dequeue() {
+    return this.values.shift();
+  }
+  sort() {
+    this.values.sort((a, b) => a.priority - b.priority);
+  }
+}
