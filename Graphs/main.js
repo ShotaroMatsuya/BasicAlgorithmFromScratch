@@ -65,6 +65,28 @@ class GraphTraversal {
     }
     delete this.adjacencyList[vertex];
   }
+  depthFirstRecursive(start) {
+    const result = [];
+    const visited = {};
+    const adjacencyList = this.adjacencyList;
+
+    (function dfs(vertex) {
+      if (!vertex) return null;
+      visited[vertex] = true;
+      result.push(vertex);
+      // Tips: in JS forEach and for loops works the same, but they differ slightly as in how the return statement works inside the loop.
+      // Since forEach is used with arrays / iterables, upon a return statement, the forEach lop continues the logic with the next iterable (similar to how continue statements work in a for loop).
+      // This is not the case with for loops as when something is returned in a for loop, it is returned as a result of the parent function the for loop was executed from.
+
+      // deepcode ignore ForEachReturns: Getting out of the loop
+      adjacencyList[vertex].forEach(neighbor => {
+        if (!visited[neighbor]) {
+          return dfs(visited[neighbor]);
+        }
+      });
+    })(start);
+    return result;
+  }
 }
 
 let gt = new GraphTraversal();
