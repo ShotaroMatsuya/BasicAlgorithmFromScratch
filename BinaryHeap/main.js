@@ -129,7 +129,7 @@ class PriorityQueue {
           swap = rightChildIdx;
         }
       }
-      if (swap) break;
+      if (swap === null) break;
       this.values[idx] = this.values[swap];
       this.values[swap] = element;
       idx = swap;
